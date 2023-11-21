@@ -1,6 +1,8 @@
 import warnings
 from pptx import Presentation
 from pptx.util import Inches
+from pptx.shapes.placeholder import PlaceholderPicture
+
 import os
 import glob
 import copy
@@ -69,7 +71,7 @@ class templatePptx:
                 if shape.has_table:
                     tableProcessor(shape, self._context, slide_number, self._special_character).process_table()
                 # 13 is the shapetype for an image
-                if shape.shape_type == 13:
+                if shape.shape_type == 13 or isinstance(shape, PlaceholderPicture):
                     pictureProcessor(shape, self._context, slide_number, slide).replace_picture()
                 # 6 is a group shape
                 if shape.shape_type == 6:

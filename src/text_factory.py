@@ -19,9 +19,11 @@ class textProcessor(parentProcessor):
         if self._shape.has_text_frame:
             for key in self._context:
                 if(self._shape.text.find(str(key)))!=-1:
+                    left, top, width, height = self._shape.left, self._shape.top, self._shape.width, self._shape.height
                     text_frame = self._shape.text_frame
                     for p in text_frame.paragraphs:
                         self._replace_runs(p)
+                    self._shape.left, self._shape.top, self._shape.width, self._shape.height = left, top, width, height
 
     def _formatting_check(self, run, last_run) -> bool:
 

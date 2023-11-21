@@ -27,7 +27,11 @@ class pictureProcessor(parentProcessor):
         alt_text = self._get_alt_text()
 
         # Find matching picture if it exists
-        alt_text_string = self._context.get(alt_text) # Outputs None if not valid
+        try:
+            alt_text_string = self._context[alt_text.replace(
+                self._special_character, "")]
+        except:
+            alt_text_string = None
         
         # If found, remove the template picture and then add the new picture
         if alt_text_string != None:
